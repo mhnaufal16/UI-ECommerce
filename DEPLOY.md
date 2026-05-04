@@ -1,4 +1,81 @@
-# Panduan Deploy AP Kreasi ke Hosting
+# Panduan Deploy AP Kreasi ke Railway.app
+
+## Persyaratan
+- Akun Railway.app (gratis)
+- Repo GitHub sudah berisi project ini di root
+
+---
+
+## Langkah Deploy ke Railway
+
+### Step 1 — Push `nixpacks.toml` ke GitHub
+Pastikan file `nixpacks.toml` sudah ada di root repo dan sudah di-push:
+```bash
+git add nixpacks.toml
+git commit -m "add railway nixpacks config"
+git push
+```
+
+### Step 2 — Set Environment Variables di Railway
+Di Railway dashboard → service **UI-ECommerce** → tab **Variables** → klik **Raw Editor**, paste ini:
+
+```
+APP_NAME=AP Kreasi
+APP_ENV=production
+APP_KEY=base64:cQpTEx0SnBcMTxWJI3AVck2Dv7uBFzf5Qm35L5yscB0=
+APP_DEBUG=false
+APP_URL=https://${{RAILWAY_PUBLIC_DOMAIN}}
+APP_LOCALE=id
+APP_FALLBACK_LOCALE=id
+APP_MAINTENANCE_DRIVER=file
+LOG_CHANNEL=stderr
+LOG_LEVEL=error
+DB_CONNECTION=sqlite
+DB_DATABASE=/tmp/database.sqlite
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+SESSION_ENCRYPT=false
+CACHE_STORE=file
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=sync
+BROADCAST_CONNECTION=log
+MAIL_MAILER=log
+```
+
+### Step 3 — Generate Domain
+Di Railway → tab **Settings** → **Networking** → klik **Generate Domain**
+
+### Step 4 — Deploy
+Klik **Deploy** atau push commit baru ke GitHub — Railway akan auto-deploy.
+
+---
+
+## Jika Masih Error
+
+Cek **Build Logs** di Railway untuk melihat error spesifik:
+- Railway dashboard → service → tab **Deployments** → klik deployment → **View Logs**
+
+Error umum dan solusinya:
+
+| Error | Solusi |
+|-------|--------|
+| `Session store not set on request` | Pastikan `SESSION_DRIVER=file` di Variables |
+| `Cache store not configured` | Pastikan `CACHE_STORE=file` di Variables |
+| `No application encryption key` | Pastikan `APP_KEY` sudah diisi di Variables |
+| `storage/framework/... not writable` | Sudah diatasi di `nixpacks.toml` |
+| `composer: command not found` | Pastikan `nixpacks.toml` sudah di-push ke repo |
+
+---
+
+## Checklist Sebelum Deploy
+
+- [ ] `nixpacks.toml` sudah ada di root repo dan di-push ke GitHub
+- [ ] Semua environment variables sudah diisi di Railway Variables tab
+- [ ] `APP_DEBUG=false`
+- [ ] `SESSION_DRIVER=file`
+- [ ] `CACHE_STORE=file`
+- [ ] Domain sudah di-generate di Railway Settings
+
 
 ## Persyaratan Hosting
 
