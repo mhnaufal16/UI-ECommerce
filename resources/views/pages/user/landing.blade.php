@@ -285,6 +285,7 @@ $products = [
         'price'    => 'Mulai Rp 750.000/m²',
         'gradient' => 'from-blue-400 to-blue-600',
         'icon'     => 'fa-lightbulb',
+        'image'    => 'https://images.unsplash.com/photo-1600298881974-6be191ceeda1?w=500&q=80',
         'badge'    => 'TERLARIS',
         'badge_color' => 'bg-red-500',
         'rating'   => '4.9',
@@ -298,6 +299,7 @@ $products = [
         'price'    => 'Mulai Rp 500.000/m²',
         'gradient' => 'from-purple-400 to-purple-600',
         'icon'     => 'fa-sign',
+        'image'    => 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=500&q=80',
         'badge'    => 'POPULER',
         'badge_color' => 'bg-purple-600',
         'rating'   => '4.8',
@@ -311,6 +313,7 @@ $products = [
         'price'    => 'Mulai Rp 200.000/huruf',
         'gradient' => 'from-gray-400 to-gray-600',
         'icon'     => 'fa-font',
+        'image'    => 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=500&q=80',
         'badge'    => null,
         'badge_color' => '',
         'rating'   => '4.7',
@@ -324,6 +327,7 @@ $products = [
         'price'    => 'Mulai Rp 650.000/m²',
         'gradient' => 'from-indigo-400 to-indigo-600',
         'icon'     => 'fa-lightbulb',
+        'image'    => 'https://images.unsplash.com/photo-1551522435-a13afa10f103?w=500&q=80',
         'badge'    => null,
         'badge_color' => '',
         'rating'   => '4.8',
@@ -337,6 +341,7 @@ $products = [
         'price'    => 'Mulai Rp 30.000/m²',
         'gradient' => 'from-yellow-400 to-orange-500',
         'icon'     => 'fa-image',
+        'image'    => 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80',
         'badge'    => 'PROMO',
         'badge_color' => 'bg-orange-500',
         'rating'   => '4.6',
@@ -350,6 +355,7 @@ $products = [
         'price'    => 'Mulai Rp 350.000/unit',
         'gradient' => 'from-cyan-400 to-cyan-600',
         'icon'     => 'fa-building',
+        'image'    => 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=500&q=80',
         'badge'    => 'BARU',
         'badge_color' => 'bg-green-500',
         'rating'   => '4.9',
@@ -363,6 +369,7 @@ $products = [
         'price'    => 'Mulai Rp 150.000/huruf',
         'gradient' => 'from-pink-400 to-pink-600',
         'icon'     => 'fa-font',
+        'image'    => 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=500&q=80',
         'badge'    => null,
         'badge_color' => '',
         'rating'   => '4.7',
@@ -376,6 +383,7 @@ $products = [
         'price'    => 'Mulai Rp 600.000/m²',
         'gradient' => 'from-green-400 to-green-600',
         'icon'     => 'fa-sign',
+        'image'    => 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=500&q=80',
         'badge'    => null,
         'badge_color' => '',
         'rating'   => '4.8',
@@ -402,29 +410,33 @@ $products = [
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             @foreach($products as $product)
             <div class="product-card bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden group cursor-pointer" data-category="{{ $product['category'] }}">
-                {{-- Image Placeholder --}}
-                <div class="relative aspect-square bg-gradient-to-br {{ $product['gradient'] }} flex items-center justify-center overflow-hidden">
-                    <i class="fas {{ $product['icon'] }} text-white/80 text-5xl"></i>
+                {{-- Product Image --}}
+                <div class="relative aspect-square overflow-hidden bg-gray-100">
+                    <img src="{{ $product['image'] }}" 
+                         alt="{{ $product['name'] }}"
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                         loading="lazy"
+                         onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-gradient-to-br {{ $product['gradient'] }} flex items-center justify-center\'><i class=\'fas {{ $product['icon'] }} text-white/80 text-5xl\'></i></div>';">
                     {{-- Badge top-left --}}
                     @if($product['badge'])
-                    <span class="absolute top-2 left-2 {{ $product['badge_color'] }} text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                    <span class="absolute top-2 left-2 {{ $product['badge_color'] }} text-white text-xs font-bold px-2 py-0.5 rounded-full shadow-lg">
                         {{ $product['badge'] }}
                     </span>
                     @endif
                     {{-- Category badge top-right --}}
-                    <span class="absolute top-2 right-2 bg-black/30 backdrop-blur-sm text-white text-xs px-2 py-0.5 rounded-full">
+                    <span class="absolute top-2 right-2 bg-black/40 backdrop-blur-sm text-white text-xs px-2 py-0.5 rounded-full border border-white/20">
                         {{ $product['category'] }}
                     </span>
                     {{-- Hover overlay --}}
-                    <div class="hover-overlay absolute inset-0 bg-black/50 flex items-center justify-center">
-                        <a href="{{ url('/kalkulator') }}" class="bg-white text-gray-800 font-semibold text-sm px-4 py-2 rounded-xl hover:bg-blue-50 transition-colors shadow-lg">
+                    <div class="hover-overlay absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-center justify-center">
+                        <a href="{{ url('/kalkulator') }}" class="bg-white text-gray-800 font-semibold text-sm px-4 py-2 rounded-xl hover:bg-blue-50 transition-colors shadow-lg transform translate-y-2 group-hover:translate-y-0">
                             <i class="fas fa-calculator mr-1.5 text-blue-600"></i>Hitung Harga
                         </a>
                     </div>
                 </div>
                 {{-- Card Body --}}
                 <div class="p-3">
-                    <h3 class="font-bold text-gray-900 text-sm leading-tight mb-1">{{ $product['name'] }}</h3>
+                    <h3 class="font-bold text-gray-900 text-sm leading-tight mb-1 group-hover:text-blue-600 transition-colors">{{ $product['name'] }}</h3>
                     <p class="text-xs text-gray-500 line-clamp-2 mb-2 leading-relaxed">{{ $product['desc'] }}</p>
                     <p class="text-blue-600 font-bold text-sm mb-2">{{ $product['price'] }}</p>
                     <div class="flex items-center gap-1 mb-3">
@@ -432,7 +444,7 @@ $products = [
                         <span class="text-xs font-semibold text-gray-700">{{ $product['rating'] }}</span>
                         <span class="text-xs text-gray-400">({{ $product['reviews'] }})</span>
                     </div>
-                    <a href="{{ url('/kalkulator') }}" class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs py-2 rounded-xl transition-colors">
+                    <a href="{{ url('/kalkulator') }}" class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs py-2 rounded-xl transition-colors shadow-sm hover:shadow-md">
                         Custom Sekarang
                     </a>
                 </div>

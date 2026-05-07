@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
+// ─── Auth Routes ──────────────────────────────────────────────────────────────
+Route::get('/masuk', fn() => view('pages.auth.login'))->name('login');
+Route::get('/daftar', fn() => view('pages.auth.register'))->name('register');
+Route::get('/lupa-password', fn() => view('pages.auth.forgot-password'))->name('forgot-password');
+
 // ─── User / Public Routes ────────────────────────────────────────────────────
 Route::get('/', fn() => view('pages.user.landing'))->name('home');
 Route::get('/produk', fn() => view('pages.user.catalog'))->name('catalog');

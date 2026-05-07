@@ -47,28 +47,36 @@
     $products = [
         ['name' => 'Neon Box LED Akrilik', 'category' => 'neon-box', 'cat_label' => 'Neon Box',
          'desc' => 'Neon box dengan material akrilik premium dan lampu LED hemat energi. Cocok untuk toko, restoran, dan klinik.',
-         'price' => 'Rp 750.000/m²', 'gradient' => 'from-blue-400 to-blue-600', 'icon' => 'fa-lightbulb'],
+         'price' => 'Rp 750.000/m²', 'gradient' => 'from-blue-400 to-blue-600', 'icon' => 'fa-lightbulb',
+         'image' => 'https://images.unsplash.com/photo-1600298881974-6be191ceeda1?w=500&q=80'],
         ['name' => 'Reklame Akrilik Custom', 'category' => 'reklame', 'cat_label' => 'Reklame',
          'desc' => 'Reklame akrilik dengan finishing glossy atau matte. Tahan cuaca dan UV untuk penggunaan outdoor.',
-         'price' => 'Rp 500.000/m²', 'gradient' => 'from-purple-400 to-purple-600', 'icon' => 'fa-sign'],
+         'price' => 'Rp 500.000/m²', 'gradient' => 'from-purple-400 to-purple-600', 'icon' => 'fa-sign',
+         'image' => 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=500&q=80'],
         ['name' => 'Letter Timbul Stainless', 'category' => 'letter-timbul', 'cat_label' => 'Letter Timbul',
          'desc' => 'Huruf timbul stainless steel 304 dengan finishing mirror atau hairline. Elegan untuk fasad gedung.',
-         'price' => 'Rp 200.000/huruf', 'gradient' => 'from-gray-400 to-gray-600', 'icon' => 'fa-font'],
-        ['name' => 'Baliho Flexi Digital', 'category' => 'baliho', 'cat_label' => 'Baliho',
-         'desc' => 'Baliho flexi printing resolusi tinggi dengan rangka besi galvanis. Ukuran custom sesuai kebutuhan.',
-         'price' => 'Rp 30.000/m²', 'gradient' => 'from-green-400 to-emerald-600', 'icon' => 'fa-image'],
-        ['name' => 'Signage Direktori Kantor', 'category' => 'signage', 'cat_label' => 'Signage',
-         'desc' => 'Signage direktori dan petunjuk arah untuk gedung perkantoran. Material akrilik atau aluminium composite.',
-         'price' => 'Rp 350.000/m²', 'gradient' => 'from-cyan-400 to-cyan-600', 'icon' => 'fa-building'],
+         'price' => 'Rp 200.000/huruf', 'gradient' => 'from-gray-400 to-gray-600', 'icon' => 'fa-font',
+         'image' => 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=500&q=80'],
         ['name' => 'Neon Box Galvanis', 'category' => 'neon-box', 'cat_label' => 'Neon Box',
          'desc' => 'Neon box dengan rangka galvanis kokoh dan tahan karat. Ideal untuk area outdoor dengan cuaca ekstrem.',
-         'price' => 'Rp 650.000/m²', 'gradient' => 'from-indigo-400 to-blue-500', 'icon' => 'fa-lightbulb'],
-        ['name' => 'Reklame Stainless Premium', 'category' => 'reklame', 'cat_label' => 'Reklame',
-         'desc' => 'Reklame stainless steel premium dengan lampu backlit LED. Tampilan mewah untuk brand premium.',
-         'price' => 'Rp 850.000/m²', 'gradient' => 'from-orange-400 to-red-500', 'icon' => 'fa-sign'],
+         'price' => 'Rp 650.000/m²', 'gradient' => 'from-indigo-400 to-blue-500', 'icon' => 'fa-lightbulb',
+         'image' => 'https://images.unsplash.com/photo-1551522435-a13afa10f103?w=500&q=80'],
+        ['name' => 'Baliho Flexi Premium', 'category' => 'baliho', 'cat_label' => 'Baliho',
+         'desc' => 'Baliho flexi printing resolusi tinggi dengan rangka besi galvanis. Ukuran custom sesuai kebutuhan.',
+         'price' => 'Rp 30.000/m²', 'gradient' => 'from-orange-400 to-orange-600', 'icon' => 'fa-image',
+         'image' => 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80'],
+        ['name' => 'Signage Direktori', 'category' => 'signage', 'cat_label' => 'Signage',
+         'desc' => 'Signage direktori dan petunjuk arah untuk gedung perkantoran. Material akrilik atau aluminium composite.',
+         'price' => 'Rp 350.000/m²', 'gradient' => 'from-cyan-400 to-cyan-600', 'icon' => 'fa-building',
+         'image' => 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=500&q=80'],
         ['name' => 'Letter Timbul Akrilik', 'category' => 'letter-timbul', 'cat_label' => 'Letter Timbul',
          'desc' => 'Huruf timbul akrilik warna-warni dengan pilihan backlit LED. Cocok untuk interior toko dan kantor.',
-         'price' => 'Rp 150.000/huruf', 'gradient' => 'from-pink-400 to-rose-500', 'icon' => 'fa-font'],
+         'price' => 'Rp 150.000/huruf', 'gradient' => 'from-pink-400 to-rose-500', 'icon' => 'fa-font',
+         'image' => 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=500&q=80'],
+        ['name' => 'Reklame Galvanis Outdoor', 'category' => 'reklame', 'cat_label' => 'Reklame',
+         'desc' => 'Reklame galvanis outdoor tahan cuaca ekstrem. Ideal untuk billboard dan papan nama besar.',
+         'price' => 'Rp 450.000/m²', 'gradient' => 'from-green-400 to-emerald-600', 'icon' => 'fa-sign',
+         'image' => 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=500&q=80'],
     ];
     @endphp
 
@@ -77,28 +85,51 @@
         <div class="product-card bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-300 group"
              data-category="{{ $product['category'] }}"
              data-name="{{ strtolower($product['name']) }}">
-            {{-- Image Placeholder --}}
-            <div class="relative h-44 bg-gradient-to-br {{ $product['gradient'] }} flex items-center justify-center overflow-hidden">
-                <i class="fas {{ $product['icon'] }} text-white/30 text-6xl group-hover:scale-110 transition-transform duration-300"></i>
+            {{-- Product Image --}}
+            <div class="relative h-44 overflow-hidden bg-gray-100">
+                <img src="{{ $product['image'] }}" 
+                     alt="{{ $product['name'] }}"
+                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                     loading="lazy"
+                     onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22%3E%3Cdefs%3E%3ClinearGradient id=%22grad{{ $loop->index }}%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%2360a5fa%22/%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%232563eb%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22400%22 height=%22300%22 fill=%22url(%23grad{{ $loop->index }})%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2260%22 fill=%22white%22 opacity=%220.3%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E%3Ci class=%22fas {{ $product['icon'] }}%22%3E%3C/i%3E%3C/text%3E%3C/svg%3E';">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div class="absolute top-3 left-3">
-                    <span class="text-xs font-bold text-white bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-full">
+                    <span class="text-xs font-bold text-white bg-black/40 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/20">
                         {{ $product['cat_label'] }}
                     </span>
                 </div>
+                @if($loop->index < 2)
+                <div class="absolute top-3 right-3">
+                    <span class="text-xs font-bold text-white bg-red-500 px-2.5 py-1 rounded-full shadow-lg animate-pulse">
+                        TERLARIS
+                    </span>
+                </div>
+                @endif
+                @if($loop->index === 4)
+                <div class="absolute top-3 right-3">
+                    <span class="text-xs font-bold text-white bg-amber-500 px-2.5 py-1 rounded-full shadow-lg">
+                        PROMO
+                    </span>
+                </div>
+                @endif
             </div>
             {{-- Content --}}
             <div class="p-5">
-                <h3 class="font-bold text-gray-900 text-base mb-1.5">{{ $product['name'] }}</h3>
+                <h3 class="font-bold text-gray-900 text-base mb-1.5 group-hover:text-blue-600 transition-colors">{{ $product['name'] }}</h3>
                 <p class="text-gray-500 text-xs leading-relaxed mb-3 line-clamp-2">{{ $product['desc'] }}</p>
                 <div class="flex items-center justify-between mb-4">
                     <div>
                         <p class="text-xs text-gray-400">Mulai dari</p>
                         <p class="font-bold text-blue-600 text-base">{{ $product['price'] }}</p>
                     </div>
-                    <x-badge status="{{ $product['category'] === 'neon-box' || $product['category'] === 'reklame' ? 'aktif' : 'aktif' }}" />
+                    <div class="flex items-center gap-1 text-amber-400">
+                        <i class="fas fa-star text-xs"></i>
+                        <span class="text-sm font-semibold text-gray-700">4.{{ 7 + ($loop->index % 3) }}</span>
+                        <span class="text-xs text-gray-400">({{ 12 + ($loop->index * 5) }})</span>
+                    </div>
                 </div>
                 <a href="{{ url('/kalkulator') }}"
-                   class="block w-full text-center py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm font-semibold rounded-xl transition-all duration-200">
+                   class="block w-full text-center py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm font-semibold rounded-xl transition-all duration-200 shadow-sm hover:shadow-md">
                     <i class="fas fa-calculator mr-1.5"></i>Custom Sekarang
                 </a>
             </div>

@@ -104,6 +104,64 @@
                 </div>
             </div>
 
+            {{-- Shipping Method --}}
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                <h2 class="font-bold text-gray-900 text-lg mb-5 flex items-center gap-2">
+                    <i class="fas fa-shipping-fast text-blue-500"></i> Pilih Ekspedisi
+                </h2>
+
+                @php
+                $expeditions = [
+                    ['id' => 'jne-reg',    'name' => 'JNE Regular',      'icon' => 'fa-truck',        'price' => 100000, 'estimate' => '3-5 hari',  'desc' => 'Pengiriman standar dengan tracking', 'color' => 'red'],
+                    ['id' => 'jne-yes',    'name' => 'JNE YES',          'icon' => 'fa-shipping-fast', 'price' => 150000, 'estimate' => '1-2 hari',  'desc' => 'Pengiriman cepat dengan asuransi',   'color' => 'red', 'recommended' => true],
+                    ['id' => 'jnt',        'name' => 'J&T Express',      'icon' => 'fa-truck',        'price' => 85000,  'estimate' => '3-4 hari',  'desc' => 'Ekonomis dengan layanan baik',       'color' => 'red'],
+                    ['id' => 'sicepat',    'name' => 'SiCepat Halu',     'icon' => 'fa-truck-fast',   'price' => 95000,  'estimate' => '2-4 hari',  'desc' => 'Cepat dan terpercaya',               'color' => 'yellow'],
+                    ['id' => 'anteraja',   'name' => 'AnterAja',         'icon' => 'fa-truck',        'price' => 80000,  'estimate' => '3-5 hari',  'desc' => 'Harga terjangkau',                    'color' => 'blue'],
+                    ['id' => 'pickup',     'name' => 'Ambil Sendiri',    'icon' => 'fa-store',        'price' => 0,      'estimate' => 'Langsung',  'desc' => 'Gratis - Ambil di workshop kami',     'color' => 'green'],
+                ];
+                @endphp
+
+                <div class="space-y-3 mb-6" id="expedition-options">
+                    @foreach($expeditions as $exp)
+                    <label class="expedition-option flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all duration-200
+                        {{ $exp['id'] === 'jne-yes' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-300 hover:bg-gray-50' }}"
+                        onclick="selectExpedition('{{ $exp['id'] }}', {{ $exp['price'] }})">
+                        <input type="radio" name="expedition" value="{{ $exp['id'] }}" {{ $exp['id'] === 'jne-yes' ? 'checked' : '' }}
+                               class="accent-blue-600" aria-label="{{ $exp['name'] }}">
+                        <div class="w-10 h-10 bg-{{ $exp['color'] }}-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas {{ $exp['icon'] }} text-{{ $exp['color'] }}-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-0.5">
+                                <span class="font-semibold text-gray-900 text-sm">{{ $exp['name'] }}</span>
+                                @if(isset($exp['recommended']) && $exp['recommended'])
+                                <span class="text-xs bg-blue-600 text-white px-2 py-0.5 rounded-full font-semibold">Recommended</span>
+                                @endif
+                            </div>
+                            <p class="text-xs text-gray-400">{{ $exp['desc'] }}</p>
+                            <p class="text-xs text-gray-500 mt-1"><i class="far fa-clock mr-1"></i>Estimasi: {{ $exp['estimate'] }}</p>
+                        </div>
+                        <div class="text-right">
+                            @if($exp['price'] > 0)
+                            <span class="font-bold text-gray-900 text-sm">Rp {{ number_format($exp['price'], 0, ',', '.') }}</span>
+                            @else
+                            <span class="font-bold text-green-600 text-sm">GRATIS</span>
+                            @endif
+                        </div>
+                    </label>
+                    @endforeach
+                </div>
+
+                {{-- Shipping Info --}}
+                <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 flex items-start gap-3">
+                    <i class="fas fa-info-circle text-blue-500 mt-0.5"></i>
+                    <div>
+                        <p class="text-sm font-semibold text-blue-800">Informasi Pengiriman</p>
+                        <p class="text-xs text-blue-700 mt-0.5">Produk akan dikemas dengan aman dan dilengkapi asuransi. Tracking number akan dikirim via WhatsApp.</p>
+                    </div>
+                </div>
+            </div>
+
             {{-- Payment Method --}}
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
                 <h2 class="font-bold text-gray-900 text-lg mb-5 flex items-center gap-2">
@@ -178,37 +236,45 @@
 
                         {{-- Price Breakdown --}}
                         <div class="space-y-2.5 mb-4">
-                            @foreach([
-                                ['Material (2m²)', 'Rp 1.600.000'],
-                                ['Lampu LED Strip', 'Rp 150.000'],
-                                ['Biaya Desain', 'Rp 250.000'],
-                                ['Pemasangan', 'Rp 300.000'],
-                                ['Ongkir', 'Rp 100.000'],
-                            ] as $item)
                             <div class="flex justify-between text-sm">
-                                <span class="text-gray-500">{{ $item[0] }}</span>
-                                <span class="font-medium text-gray-800">{{ $item[1] }}</span>
+                                <span class="text-gray-500">Material (2m²)</span>
+                                <span class="font-medium text-gray-800">Rp 1.600.000</span>
                             </div>
-                            @endforeach
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">Lampu LED Strip</span>
+                                <span class="font-medium text-gray-800">Rp 150.000</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">Biaya Desain</span>
+                                <span class="font-medium text-gray-800">Rp 250.000</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">Pemasangan</span>
+                                <span class="font-medium text-gray-800">Rp 300.000</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">Ongkir <span id="expedition-name" class="text-xs">(JNE YES)</span></span>
+                                <span class="font-medium text-gray-800" id="shipping-cost">Rp 150.000</span>
+                            </div>
                             <div class="flex justify-between text-sm">
                                 <span class="text-green-600 font-medium">Diskon HEMAT10</span>
-                                <span class="font-medium text-green-600">-Rp 240.000</span>
+                                <span class="font-medium text-green-600" id="discount-amount">-Rp 245.000</span>
                             </div>
                         </div>
 
                         <div class="border-t border-gray-100 pt-4 mb-4">
                             <div class="flex justify-between items-center mb-2">
                                 <span class="font-bold text-gray-900">Total</span>
-                                <span class="font-extrabold text-blue-600 text-xl">Rp 2.160.000</span>
+                                <span class="font-extrabold text-blue-600 text-xl" id="total-price">Rp 2.205.000</span>
                             </div>
                             <div class="bg-amber-50 border border-amber-200 rounded-xl p-3">
                                 <div class="flex justify-between text-sm mb-1">
                                     <span class="text-amber-700 font-semibold">DP 50% (sekarang)</span>
-                                    <span class="font-bold text-amber-800">Rp 1.080.000</span>
+                                    <span class="font-bold text-amber-800" id="dp-amount">Rp 1.102.500</span>
                                 </div>
                                 <div class="flex justify-between text-sm">
                                     <span class="text-gray-500">Pelunasan</span>
-                                    <span class="font-medium text-gray-700">Rp 1.080.000</span>
+                                    <span class="font-medium text-gray-700" id="remaining-amount">Rp 1.102.500</span>
                                 </div>
                             </div>
                         </div>
@@ -216,7 +282,7 @@
                         {{-- Pay Button --}}
                         <button id="pay-btn" onclick="handlePayment()"
                                 class="w-full py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-xl transition-all duration-200 hover:-translate-y-0.5 shadow-md shadow-blue-200 mb-3">
-                            <i class="fas fa-lock mr-2"></i>Bayar Sekarang — Rp 1.080.000
+                            <i class="fas fa-lock mr-2"></i>Bayar Sekarang — <span id="pay-btn-amount">Rp 1.102.500</span>
                         </button>
                         <a href="https://wa.me/6281234567890?text=Halo%20AP%20Kreasi%2C%20saya%20ingin%20konfirmasi%20order"
                            target="_blank"
@@ -246,6 +312,73 @@
 
 @push('scripts')
 <script>
+// Base prices
+const BASE_PRICES = {
+    material: 1600000,
+    led: 150000,
+    design: 250000,
+    installation: 300000,
+    discountPercent: 10
+};
+
+// Expedition data
+const EXPEDITIONS = {
+    'jne-reg': { name: 'JNE Regular', price: 100000 },
+    'jne-yes': { name: 'JNE YES', price: 150000 },
+    'jnt': { name: 'J&T Express', price: 85000 },
+    'sicepat': { name: 'SiCepat Halu', price: 95000 },
+    'anteraja': { name: 'AnterAja', price: 80000 },
+    'pickup': { name: 'Ambil Sendiri', price: 0 }
+};
+
+let currentShippingCost = 150000; // Default JNE YES
+
+function formatRupiah(amount) {
+    return 'Rp ' + amount.toLocaleString('id-ID');
+}
+
+function calculateTotal() {
+    const subtotal = BASE_PRICES.material + BASE_PRICES.led + BASE_PRICES.design + BASE_PRICES.installation + currentShippingCost;
+    const discount = Math.round(subtotal * BASE_PRICES.discountPercent / 100);
+    const total = subtotal - discount;
+    const dp = Math.round(total / 2);
+    const remaining = total - dp;
+
+    return { subtotal, discount, total, dp, remaining };
+}
+
+function updatePriceSummary() {
+    const prices = calculateTotal();
+    
+    document.getElementById('shipping-cost').textContent = formatRupiah(currentShippingCost);
+    document.getElementById('discount-amount').textContent = '-' + formatRupiah(prices.discount);
+    document.getElementById('total-price').textContent = formatRupiah(prices.total);
+    document.getElementById('dp-amount').textContent = formatRupiah(prices.dp);
+    document.getElementById('remaining-amount').textContent = formatRupiah(prices.remaining);
+    document.getElementById('pay-btn-amount').textContent = formatRupiah(prices.dp);
+}
+
+function selectExpedition(id, price) {
+    // Update visual selection
+    document.querySelectorAll('.expedition-option').forEach(el => {
+        const isSelected = el.querySelector('input').value === id;
+        el.className = `expedition-option flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
+            isSelected ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-300 hover:bg-gray-50'
+        }`;
+        if (isSelected) el.querySelector('input').checked = true;
+    });
+
+    // Update shipping cost
+    currentShippingCost = price;
+    
+    // Update expedition name in summary
+    const expeditionName = EXPEDITIONS[id].name;
+    document.getElementById('expedition-name').textContent = `(${expeditionName})`;
+    
+    // Recalculate and update prices
+    updatePriceSummary();
+}
+
 function selectPayment(id) {
     document.querySelectorAll('.payment-option').forEach(el => {
         const isSelected = el.querySelector('input').value === id;
@@ -267,5 +400,10 @@ function handlePayment() {
         btn.className = btn.className.replace('from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800', 'from-green-500 to-green-600');
     }, 2000);
 }
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    updatePriceSummary();
+});
 </script>
 @endpush
