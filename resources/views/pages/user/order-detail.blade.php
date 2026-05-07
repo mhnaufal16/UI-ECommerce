@@ -114,6 +114,142 @@
                 </div>
             </div>
 
+            {{-- ===== TRACKING PENGIRIMAN ===== --}}
+            {{-- Hanya tampil jika status = dikirim atau selesai --}}
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden" id="tracking-section">
+
+                {{-- Header --}}
+                <div class="bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-4 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-truck text-white"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-white">Tracking Pengiriman</p>
+                            <p class="text-orange-100 text-xs">JNE YES · Estimasi tiba: <strong>Senin, 20 Jan 2025</strong></p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xs text-orange-200">No. Resi</p>
+                        <p class="font-mono font-bold text-white text-sm tracking-wider">JNE2025011500123</p>
+                    </div>
+                </div>
+
+                <div class="p-6">
+
+                    {{-- Origin → Destination bar --}}
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="flex-1 text-center">
+                            <div class="w-9 h-9 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-1.5">
+                                <i class="fas fa-warehouse text-blue-600 text-sm"></i>
+                            </div>
+                            <p class="text-xs font-bold text-gray-800">AP Kreasi</p>
+                            <p class="text-xs text-gray-400">Surabaya</p>
+                        </div>
+                        <div class="flex-1 flex flex-col items-center gap-1">
+                            <div class="w-full flex items-center">
+                                <div class="flex-1 h-1 bg-orange-400 rounded-l-full"></div>
+                                <div class="w-7 h-7 bg-orange-500 rounded-full flex items-center justify-center shadow-md shadow-orange-200 animate-bounce z-10">
+                                    <i class="fas fa-truck text-white text-xs"></i>
+                                </div>
+                                <div class="flex-1 h-1 bg-gray-200 rounded-r-full"></div>
+                            </div>
+                            <span class="text-xs font-semibold text-orange-600">Dalam Perjalanan</span>
+                        </div>
+                        <div class="flex-1 text-center">
+                            <div class="w-9 h-9 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-1.5">
+                                <i class="fas fa-map-marker-alt text-gray-400 text-sm"></i>
+                            </div>
+                            <p class="text-xs font-bold text-gray-800">Budi Santoso</p>
+                            <p class="text-xs text-gray-400">Jakarta Selatan</p>
+                        </div>
+                    </div>
+
+                    {{-- Status terkini --}}
+                    <div class="bg-orange-50 border border-orange-200 rounded-xl p-3.5 mb-5 flex items-center gap-3">
+                        <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-map-marker-alt text-white text-xs"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-bold text-orange-900">Dalam perjalanan ke kota tujuan</p>
+                            <p class="text-xs text-orange-700 truncate">Hub JNE Surabaya → Hub JNE Jakarta · <span class="font-medium">2 jam lalu</span></p>
+                        </div>
+                        <span class="text-xs bg-orange-100 text-orange-600 font-semibold px-2.5 py-1 rounded-full flex-shrink-0">TERKINI</span>
+                    </div>
+
+                    {{-- Timeline riwayat --}}
+                    <div class="space-y-0" id="tracking-timeline-detail">
+
+                        @php
+                        $trackPoints = [
+                            ['done' => true,  'current' => true,  'icon' => 'fa-truck',        'color' => 'orange', 'title' => 'Dalam Perjalanan Antar Hub',   'loc' => 'Hub JNE Surabaya → Jakarta',    'time' => '06:45', 'date' => '18 Jan'],
+                            ['done' => true,  'current' => false, 'icon' => 'fa-box-open',      'color' => 'blue',   'title' => 'Diterima di Hub Asal',         'loc' => 'Hub JNE Surabaya, Jawa Timur',  'time' => '20:30', 'date' => '17 Jan'],
+                            ['done' => true,  'current' => false, 'icon' => 'fa-warehouse',     'color' => 'blue',   'title' => 'Diserahkan ke Kurir',          'loc' => 'Workshop AP Kreasi, Surabaya',  'time' => '15:00', 'date' => '17 Jan'],
+                            ['done' => false, 'current' => false, 'icon' => 'fa-building',      'color' => 'gray',   'title' => 'Tiba di Hub Tujuan',           'loc' => 'Hub JNE Jakarta',               'time' => 'Est.',  'date' => '19 Jan'],
+                            ['done' => false, 'current' => false, 'icon' => 'fa-motorcycle',    'color' => 'gray',   'title' => 'Pengiriman Terakhir (Last Mile)','loc' => 'Jakarta Selatan',              'time' => 'Est.',  'date' => '20 Jan'],
+                            ['done' => false, 'current' => false, 'icon' => 'fa-check-double',  'color' => 'gray',   'title' => 'Paket Diterima',               'loc' => 'Alamat Penerima',               'time' => 'Est.',  'date' => '20 Jan'],
+                        ];
+                        @endphp
+
+                        @foreach($trackPoints as $i => $pt)
+                        <div class="flex gap-3 {{ $i < count($trackPoints) - 1 ? 'pb-4' : '' }}">
+                            {{-- Icon + line --}}
+                            <div class="flex flex-col items-center flex-shrink-0">
+                                <div class="w-8 h-8 rounded-full flex items-center justify-center border-2 z-10
+                                    {{ $pt['current'] ? 'bg-orange-500 border-orange-500 text-white ring-4 ring-orange-100'
+                                        : ($pt['done'] ? 'bg-green-500 border-green-500 text-white'
+                                        : 'bg-white border-gray-200 text-gray-300') }}">
+                                    @if($pt['done'] && !$pt['current'])
+                                        <i class="fas fa-check text-xs"></i>
+                                    @else
+                                        <i class="fas {{ $pt['icon'] }} text-xs {{ $pt['current'] ? 'animate-pulse' : '' }}"></i>
+                                    @endif
+                                </div>
+                                @if($i < count($trackPoints) - 1)
+                                <div class="w-0.5 flex-1 min-h-[1.5rem] mt-1
+                                    {{ $pt['done'] ? 'bg-green-200' : 'bg-gray-100' }}"></div>
+                                @endif
+                            </div>
+                            {{-- Content --}}
+                            <div class="flex-1 min-w-0 pb-1">
+                                <div class="flex items-start justify-between gap-2">
+                                    <div>
+                                        <p class="text-sm font-semibold
+                                            {{ $pt['current'] ? 'text-orange-700' : ($pt['done'] ? 'text-gray-900' : 'text-gray-400') }}">
+                                            {{ $pt['title'] }}
+                                            @if($pt['current'])
+                                            <span class="ml-1.5 text-xs bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full font-semibold">TERKINI</span>
+                                            @endif
+                                        </p>
+                                        <p class="text-xs mt-0.5 flex items-center gap-1
+                                            {{ $pt['done'] ? 'text-gray-500' : 'text-gray-300' }}">
+                                            <i class="fas fa-map-marker-alt text-[10px]"></i>{{ $pt['loc'] }}
+                                        </p>
+                                    </div>
+                                    <div class="text-right flex-shrink-0">
+                                        <p class="text-xs font-semibold {{ $pt['done'] ? 'text-gray-700' : 'text-gray-300' }}">{{ $pt['time'] }}</p>
+                                        <p class="text-xs {{ $pt['done'] ? 'text-gray-400' : 'text-gray-300' }}">{{ $pt['date'] }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+
+                    {{-- Footer actions --}}
+                    <div class="mt-5 pt-4 border-t border-gray-100 flex flex-col sm:flex-row gap-2">
+                        <a href="{{ url('/dashboard/orders/1/tracking') }}"
+                           class="flex-1 flex items-center justify-center gap-2 py-2.5 bg-orange-50 hover:bg-orange-100 text-orange-700 font-semibold text-sm rounded-xl transition-colors border border-orange-200">
+                            <i class="fas fa-expand-alt text-xs"></i> Lihat Detail Lengkap
+                        </a>
+                        <a href="https://www.jne.co.id/id/tracking/trace" target="_blank"
+                           class="flex-1 flex items-center justify-center gap-2 py-2.5 bg-gray-50 hover:bg-gray-100 text-gray-600 font-semibold text-sm rounded-xl transition-colors border border-gray-200">
+                            <i class="fas fa-external-link-alt text-xs"></i> Cek di Website JNE
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             {{-- Order Specification --}}
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
                 <h2 class="font-bold text-gray-900 text-lg mb-5">Spesifikasi Order</h2>
@@ -226,6 +362,13 @@
                             <span class="font-bold text-amber-700">Rp 1.200.000</span>
                         </div>
                     </div>
+
+                    {{-- Tracking Button (shown when status = dikirim) --}}
+                    <a href="#tracking-section"
+                       onclick="document.getElementById('tracking-section').scrollIntoView({behavior:'smooth'}); return false;"
+                       class="block w-full text-center py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-xl transition-all duration-200 hover:-translate-y-0.5 shadow-md shadow-orange-200 mb-3">
+                        <i class="fas fa-truck mr-2 animate-pulse"></i>Lacak Pengiriman
+                    </a>
 
                     <a href="https://wa.me/6281234567890?text=Halo%20AP%20Kreasi%2C%20saya%20ingin%20tanya%20status%20order%20ORD-2025-001"
                        target="_blank"

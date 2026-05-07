@@ -91,6 +91,10 @@
                 <i class="fas fa-clipboard-list icon"></i> Manajemen Order
                 <span class="ml-auto bg-blue-600 text-white text-xs px-2 py-0.5 rounded-full">12</span>
             </a>
+            <a href="{{ url('/admin/shipping') }}" class="sidebar-link {{ request()->is('admin/shipping*') ? 'active' : '' }}">
+                <i class="fas fa-truck icon"></i> Pengiriman
+                <span class="ml-auto bg-orange-500 text-white text-xs px-2 py-0.5 rounded-full">2</span>
+            </a>
 
             <p class="sidebar-group">Katalog</p>
             <a href="{{ url('/admin/products') }}" class="sidebar-link {{ request()->is('admin/products*') ? 'active' : '' }}">

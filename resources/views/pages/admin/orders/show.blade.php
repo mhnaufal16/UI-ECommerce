@@ -225,6 +225,12 @@
            class="flex items-center justify-center gap-2 w-full py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl transition-colors shadow-sm">
             <i class="fab fa-whatsapp text-lg"></i> Hubungi Pelanggan
         </a>
+
+        {{-- Tracking Button --}}
+        <a href="{{ url('/admin/shipping') }}"
+           class="flex items-center justify-center gap-2 w-full py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-xl transition-colors shadow-sm">
+            <i class="fas fa-truck text-lg"></i> Manajemen Pengiriman
+        </a>
     </div>
 </div>
 

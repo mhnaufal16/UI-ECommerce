@@ -148,7 +148,7 @@
                                 </td>
                                 <td class="px-6 py-4 font-semibold text-gray-900">{{ $order['total'] }}</td>
                                 <td class="px-6 py-4">
-                                    <a href="{{ url('/order/' . strtolower(str_replace('-', '', $order['id']))) }}"
+                                    <a href="{{ url('/dashboard/orders/1') }}"
                                        class="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors">
                                         <i class="fas fa-eye text-[10px]"></i> Detail
                                     </a>
@@ -175,7 +175,7 @@
                                 <p class="text-xs text-gray-400">{{ $order['date'] }}</p>
                                 <p class="font-bold text-gray-900 text-sm mt-0.5">{{ $order['total'] }}</p>
                             </div>
-                            <a href="#" class="text-xs font-semibold text-blue-600 bg-blue-50 px-3 py-1.5 rounded-lg">
+                            <a href="{{ url('/dashboard/orders/1') }}" class="text-xs font-semibold text-blue-600 bg-blue-50 px-3 py-1.5 rounded-lg">
                                 <i class="fas fa-eye mr-1"></i>Detail
                             </a>
                         </div>
